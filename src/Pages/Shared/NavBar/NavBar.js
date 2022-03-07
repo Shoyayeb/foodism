@@ -16,6 +16,7 @@ import {
 } from '@heroicons/react/outline';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import logoImage from '../../../Assets/logo.png';
 // import { Fragment } from 'react/cjs/react.production.min';
 
@@ -88,17 +89,17 @@ const NavBar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
                     <div className="flex justify-start lg:w-0 lg:flex-1">
-                        <a href="#">
+                        <Link to="/">
                             <span className="sr-only">Foodism</span>
                             <img
                                 className="h-8 w-auto sm:h-10"
                                 src={logoImage}
                                 alt=""
                             />
-                        </a>
+                        </Link>
                     </div>
                     <div className="-mr-2 -my-2 md:hidden">
-                        <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
                             <span className="sr-only">Open menu</span>
                             <MenuIcon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
@@ -110,10 +111,10 @@ const NavBar = () => {
                                     <Popover.Button
                                         className={classNames(
                                             open ? 'text-gray-900' : 'text-gray-500',
-                                            'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                            'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
                                         )}
                                     >
-                                        <span>Solutions</span>
+                                        <span>Foods</span>
                                         <ChevronDownIcon
                                             className={classNames(
                                                 open ? 'text-gray-600' : 'text-gray-400',
@@ -141,7 +142,7 @@ const NavBar = () => {
                                                             href={item.href}
                                                             className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                                                         >
-                                                            <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                                                            <item.icon className="flex-shrink-0 h-6 w-6 text-red-600" aria-hidden="true" />
                                                             <div className="ml-4">
                                                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
@@ -169,12 +170,12 @@ const NavBar = () => {
                             )}
                         </Popover>
 
-                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                            Pricing
-                        </a>
-                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                            Docs
-                        </a>
+                        <Link to="/about" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                            Orders
+                        </Link>
+                        <Link to="/about" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                            Reviews
+                        </Link>
 
                         <Popover className="relative">
                             {({ open }) => (
@@ -182,7 +183,7 @@ const NavBar = () => {
                                     <Popover.Button
                                         className={classNames(
                                             open ? 'text-gray-900' : 'text-gray-500',
-                                            'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                            'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
                                         )}
                                     >
                                         <span>More</span>
@@ -213,7 +214,7 @@ const NavBar = () => {
                                                             href={item.href}
                                                             className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                                                         >
-                                                            <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                                                            <item.icon className="flex-shrink-0 h-6 w-6 text-red-600" aria-hidden="true" />
                                                             <div className="ml-4">
                                                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
@@ -235,7 +236,7 @@ const NavBar = () => {
                                                         </ul>
                                                     </div>
                                                     <div className="mt-5 text-sm">
-                                                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                        <a href="#" className="font-medium text-red-600 hover:text-red-500">
                                                             {' '}
                                                             View all posts <span aria-hidden="true">&rarr;</span>
                                                         </a>
@@ -249,15 +250,15 @@ const NavBar = () => {
                         </Popover>
                     </Popover.Group>
                     <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                        <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+                        <Link to="/login" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
                             Sign in
-                        </a>
-                        <a
-                            href="#"
+                        </Link>
+                        <Link
+                            to="/register"
                             className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700"
                         >
                             Sign up
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -278,12 +279,12 @@ const NavBar = () => {
                                 <div>
                                     <img
                                         className="h-8 w-auto"
-                                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                                        src="https://tailwindui.com/img/logos/workflow-mark-red-600.svg"
                                         alt="Workflow"
                                     />
                                 </div>
                                 <div className="-mr-2">
-                                    <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                    <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
                                         <span className="sr-only">Close menu</span>
                                         <XIcon className="h-6 w-6" aria-hidden="true" />
                                     </Popover.Button>
@@ -297,7 +298,7 @@ const NavBar = () => {
                                             href={item.href}
                                             className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
                                         >
-                                            <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                                            <item.icon className="flex-shrink-0 h-6 w-6 text-red-600" aria-hidden="true" />
                                             <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
                                         </a>
                                     ))}
@@ -326,13 +327,13 @@ const NavBar = () => {
                             <div>
                                 <a
                                     href="#"
-                                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700"
                                 >
                                     Sign up
                                 </a>
                                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                                     Existing customer?{' '}
-                                    <a href="#" className="text-indigo-600 hover:text-indigo-500">
+                                    <a href="#" className="text-red-600 hover:text-red-500">
                                         Sign in
                                     </a>
                                 </p>
