@@ -1,6 +1,6 @@
 #login {
-    background-image: url(../../../Assets/background.jpg);
+    background-image: url(../../../Assets/spice.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    /* background-size: contain; */
+    background-size: cover;
 }

@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage/HomePage/HomePage';
 import LoginRegister from './Pages/LoginRegister/LoginRegister/LoginRegister';
 import Register from './Pages/LoginRegister/Register/Register';
 import NotFound from './Pages/NotFound/NotFound';
+import Footer from './Pages/Shared/Footer/Footer';
 import NavBar from './Pages/Shared/NavBar/NavBar';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="dashboard/*" element={<DashBoard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

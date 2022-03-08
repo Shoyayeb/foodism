@@ -1,5 +1,6 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './LoginRegister.css';
 const LoginRegister = () => {
     return (
@@ -10,9 +11,9 @@ const LoginRegister = () => {
                         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-100">Sign in to your account</h2>
                         <p className="mt-2 text-center text-sm text-gray-100">
                             Or{' '}
-                            <a href="#" className="font-medium text-red-600 hover:text-red-500">
+                            <Link to="/register" className="font-medium text-red-600 hover:text-red-500">
                                 Create Your New Account
-                            </a>
+                            </Link>
                         </p>
                     </div>
                     <form className="mt-8 space-y-6" action="#" method="POST">
