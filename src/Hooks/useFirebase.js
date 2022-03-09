@@ -1,14 +1,23 @@
 import {
-  createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, TwitterAuthProvider, updateProfile
+  createUserWithEmailAndPassword,
+  getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+  TwitterAuthProvider,
+  updateProfile
 } from "firebase/auth";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import initializeFirebase from "../Firebase/firebase.init";
 initializeFirebase();
 
 const useFirebase = () => {
   const [user, setUser] = useState([]);
   const [loading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [modal, setModal] = useState(false);
+  const [error, setError] = useState("");
   const auth = getAuth();
   auth.useDeviceLanguage();
   // create user with email
@@ -26,6 +35,7 @@ const useFirebase = () => {
       })
       .catch((error) => {
         setError(error.message);
+        setModal(true);
       })
       .finally(() => setIsLoading(false));
   };
@@ -44,6 +54,7 @@ const useFirebase = () => {
         })
         .catch((error) => {
           setError(error.message);
+          setModal(true);
         })
         .finally(() => {
           setIsLoading(false);
@@ -55,6 +66,7 @@ const useFirebase = () => {
         })
         .catch((error) => {
           setError(error.message);
+          setModal(true);
         })
         .finally(() => {
           setIsLoading(false);
@@ -66,6 +78,7 @@ const useFirebase = () => {
         })
         .catch((error) => {
           setError(error.message);
+          setModal(true);
         })
         .finally(() => {
           setIsLoading(false);
@@ -96,6 +109,7 @@ const useFirebase = () => {
       })
       .catch((error) => {
         setError(error.message);
+        setModal(true);
       })
       .finally(() => setIsLoading(false));
   };
@@ -106,6 +120,8 @@ const useFirebase = () => {
     setError,
     loading,
     setIsLoading,
+    modal,
+    setModal,
     createUserByEmail,
     socialSignIn,
     signOutUser,

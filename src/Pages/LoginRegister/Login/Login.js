@@ -1,56 +1,22 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
-import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import useAuth from './../../../Hooks/useAuth';
-const Register = () => {
-    const [registerData, setRegisterData] = useState({});
-    const { setError, createUserByEmail, error, socialSignIn } = useAuth();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const redirect_uri = location.state?.from || "/home";
-    const handleOnChange = (e) => {
-        const field = e.target.name;
-        const value = e.target.value;
-        const data = { ...registerData };
-        data[field] = value;
-        setRegisterData(data);
-    };
-
-    const emailRegister = () => {
-        createUserByEmail(
-            registerData.email,
-            registerData.password,
-            registerData.name
-        ).then((result) => {
-            navigate(redirect_uri);
-        });
-    };
-    const handleRegister = (e) => {
-        e.preventDefault();
-        if (
-            registerData === {} ||
-            !registerData.email ||
-            !registerData.password ||
-            !registerData.name
-        ) {
-            setError("Please enter your information correctly");
-        } else {
-            emailRegister();
-        }
-    }
+import ErrorModal from './../../Shared/Modals/ErrorModal';
+import './Login.css';
+const Login = () => {
+    const { socialSignIn, error } = useAuth();
     return (
         <>
+            {error ? <ErrorModal /> : ""}
             <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" id="login-register-bg">
                 <div className="max-w-md w-full space-y-8">
                     <div>
-                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-100">Create Your New Account</h2>
+                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-100">Sign in to your account</h2>
                         <p className="mt-2 text-center text-sm text-gray-100">
                             Or{' '}
-                            <Link to="/login" className="font-medium text-red-600 hover:text-red-500">
-                                Sign in to your account
-                                <span>
-                                    {error ? error : ""}
-                                </span>
+                            <Link to="/register" className="font-medium text-red-600 hover:text-red-500">
+                                Create Your New Account
                             </Link>
                         </p>
                     </div>
@@ -118,24 +84,9 @@ const Register = () => {
                             </svg>
                         </button>
                     </div>
-                    <form className="mt-8 space-y-6" onSubmit={handleRegister}>
+                    <form className="mt-8 space-y-6" action="#" method="POST">
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
-                            <div>
-                                <label htmlFor="name" className="sr-only">
-                                    Name
-                                </label>
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    autoComplete="name"
-                                    onChange={handleOnChange}
-                                    required
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
-                                    placeholder="Name"
-                                />
-                            </div>
                             <div>
                                 <label htmlFor="email-address" className="sr-only">
                                     Email address
@@ -145,9 +96,8 @@ const Register = () => {
                                     name="email"
                                     type="email"
                                     autoComplete="email"
-                                    onChange={handleOnChange}
                                     required
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
+                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
                                     placeholder="Email address"
                                 />
                             </div>
@@ -160,11 +110,30 @@ const Register = () => {
                                     name="password"
                                     type="password"
                                     autoComplete="current-password"
-                                    onChange={handleOnChange}
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
                                     placeholder="Password"
                                 />
+                            </div>
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <input
+                                    id="remember-me"
+                                    name="remember-me"
+                                    type="checkbox"
+                                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-800 rounded"
+                                />
+                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-200">
+                                    Remember me
+                                </label>
+                            </div>
+
+                            <div className="text-sm">
+                                <a href="#" className="font-medium text-red-600 hover:text-red-500">
+                                    Forgot your password?
+                                </a>
                             </div>
                         </div>
 
@@ -176,15 +145,14 @@ const Register = () => {
                                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                                     <LockClosedIcon className="h-5 w-5 text-red-300 group-hover:text-red-400" aria-hidden="true" />
                                 </span>
-                                Sign up
+                                Sign in
                             </button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </>
     );
 };
 
-export default Register;
+export default Login;
