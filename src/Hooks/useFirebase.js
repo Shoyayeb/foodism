@@ -1,5 +1,5 @@
 import {
-  createUserWithEmailAndPassword, getAuth, onAuthStateChanged, updateProfile
+  createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, updateProfile
 } from "firebase/auth";
 import { useEffect, useState } from 'react';
 import initializeFirebase from "../Firebase/firebase.init";
@@ -29,6 +29,7 @@ const useFirebase = () => {
       })
       .finally(() => setIsLoading(false));
   };
+
   // managing user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -43,6 +44,20 @@ const useFirebase = () => {
     return () => unsubscribe();
   }, [auth]);
 
+  // sign out
+  const signOutUser = () => {
+    setIsLoading(true);
+    signOut(auth)
+      .then(() => {
+        setError("");
+        console.log("Sign out success");
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
   return {
     user,
     error,
@@ -50,6 +65,7 @@ const useFirebase = () => {
     loading,
     setIsLoading,
     createUserByEmail,
+    signOutUser,
   };
 };
 

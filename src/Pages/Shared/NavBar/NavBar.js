@@ -84,7 +84,7 @@ function classNames(...classes) {
 }
 
 const NavBar = () => {
-    const { user } = useAuth();
+    const { user, signOutUser } = useAuth();
 
     return (
         <Popover className="relative bg-white">
@@ -298,12 +298,12 @@ const NavBar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a
-                                            href="#"
+                                        <button
+                                            onClick={signOutUser}
                                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                         >
                                             Sign out
-                                        </a>
+                                        </button>
                                     )}
                                 </Menu.Item>
                             </Menu.Items>
