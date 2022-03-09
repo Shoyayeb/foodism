@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import AuthProvider from './Context/AuthProvider/AuthProvider';
 import DashBoard from './Pages/DashBoard/DashBoard/DashBoard';
 import HomePage from './Pages/HomePage/HomePage/HomePage';
 import LoginRegister from './Pages/LoginRegister/LoginRegister/LoginRegister';
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <div className="App">
+      <AuthProvider >
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -22,6 +24,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
+      </AuthProvider>
     </div>
   );
 }
