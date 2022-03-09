@@ -85,7 +85,9 @@ function classNames(...classes) {
 
 const NavBar = () => {
     const { user, signOutUser } = useAuth();
-
+    console.log('====================================');
+    console.log(user.photoURL);
+    console.log('====================================');
     return (
         <Popover className="relative bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -107,7 +109,7 @@ const NavBar = () => {
                         </Popover.Button>
                     </div>
                     <Popover.Group as="nav" className="hidden md:flex space-x-10">
-                        <Link to="/homep" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                        <Link to="/home" className="text-base font-medium text-gray-500 hover:text-gray-900">
                             Home
                         </Link>
                         <Popover className="relative">
@@ -255,13 +257,13 @@ const NavBar = () => {
                         </Popover>
                     </Popover.Group>
 
-                    {user.email ? <Menu as="div" className="ml-3 relative">
+                    {user.email ? <Menu as="div" className="ml-3 relative z-30">
                         <div>
                             <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <span className="sr-only">Open user menu</span>
                                 <img
                                     className="h-8 w-8 rounded-full"
-                                    src={"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" || user.photoURL}
+                                    src={user.photoURL ? user.photoURL : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}
                                     alt="user"
                                 />
                             </Menu.Button>

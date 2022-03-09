@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from './../../../Hooks/useAuth';
 const Register = () => {
     const [registerData, setRegisterData] = useState({});
-    const { setError, createUserByEmail, error } = useAuth();
+    const { setError, createUserByEmail, error, socialSignIn } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const redirect_uri = location.state?.from || "/home";
@@ -56,7 +56,7 @@ const Register = () => {
                     </div>
                     <div className='flex justify-between items-center'>
                         {/* twitter button */}
-                        <button className=' inline-flex justify-center shadow-sm hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-md'>
+                        <button onClick={() => socialSignIn("twitter")} className=' inline-flex justify-center shadow-sm hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-md'>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="65"
@@ -76,7 +76,7 @@ const Register = () => {
                                 ></path>
                             </svg></button>
                         {/* google button */}
-                        <button className=' inline-flex justify-center shadow-sm hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 rounded-md'>
+                        <button onClick={() => socialSignIn("google")} className=' inline-flex justify-center shadow-sm hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 rounded-md'>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="65"
@@ -97,7 +97,7 @@ const Register = () => {
                             </svg>
                         </button>
                         {/* github button */}
-                        <button className=' inline-flex justify-center shadow-sm hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white rounded-md'>
+                        <button onClick={() => socialSignIn("github")} className=' inline-flex justify-center shadow-sm hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white rounded-md'>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="65"

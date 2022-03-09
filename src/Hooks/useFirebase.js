@@ -1,5 +1,5 @@
 import {
-  createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, updateProfile
+  createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, TwitterAuthProvider, updateProfile
 } from "firebase/auth";
 import { useEffect, useState } from 'react';
 import initializeFirebase from "../Firebase/firebase.init";
@@ -29,7 +29,49 @@ const useFirebase = () => {
       })
       .finally(() => setIsLoading(false));
   };
+  // login or create user with gmail twitter and github
+  const googleProvider = new GoogleAuthProvider();
+  const twitterProvider = new TwitterAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
+  // google sign in
+  const socialSignIn = (socialProvider) => {
+    setIsLoading(true);
+    if (socialProvider === "google") {
+      return signInWithPopup(auth, googleProvider)
+        .then((result) => {
+          setError("");
+        })
+        .catch((error) => {
+          setError(error.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else if (socialProvider === "twitter") {
+      return signInWithPopup(auth, twitterProvider)
+        .then((result) => {
+          setError("");
+        })
+        .catch((error) => {
+          setError(error.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else if (socialProvider === "github") {
+      return signInWithPopup(auth, githubProvider)
+        .then((result) => {
+          setError("");
+        })
+        .catch((error) => {
+          setError(error.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  };
   // managing user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -65,6 +107,7 @@ const useFirebase = () => {
     loading,
     setIsLoading,
     createUserByEmail,
+    socialSignIn,
     signOutUser,
   };
 };
