@@ -48,9 +48,6 @@ const Register = () => {
                             Or{' '}
                             <Link to="/login" className="font-medium text-red-600 hover:text-red-500">
                                 Sign in to your account
-                                <span>
-                                    {error ? error : ""}
-                                </span>
                             </Link>
                         </p>
                     </div>

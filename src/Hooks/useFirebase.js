@@ -4,6 +4,7 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   TwitterAuthProvider,
@@ -39,6 +40,21 @@ const useFirebase = () => {
       })
       .finally(() => setIsLoading(false));
   };
+  // login user with email
+  // login user with email and password
+  const loginUserByEmail = (email, password) => {
+    setIsLoading(true);
+    return signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setError("");
+      })
+      .catch((error) => {
+        setError(error.message);
+        setModal(true);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
   // login or create user with gmail twitter and github
   const googleProvider = new GoogleAuthProvider();
   const twitterProvider = new TwitterAuthProvider();
@@ -123,6 +139,7 @@ const useFirebase = () => {
     modal,
     setModal,
     createUserByEmail,
+    loginUserByEmail,
     socialSignIn,
     signOutUser,
   };

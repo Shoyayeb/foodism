@@ -1,14 +1,39 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from './../../../Hooks/useAuth';
-import ErrorModal from './../../Shared/Modals/ErrorModal';
 import './Login.css';
 const Login = () => {
-    const { socialSignIn, error } = useAuth();
+    const { socialSignIn, error, setError, loginUserByEmail } = useAuth();
+    const [loginData, setLoginData] = useState({});
+    const navigate = useNavigate();
+    const location = useLocation();
+    const redirect_uri = location.state?.from || "/home";
+    const emailSignIn = () => {
+        loginUserByEmail(loginData.email, loginData.password).then(
+            (result) => {
+                navigate(redirect_uri);
+            }
+        );
+    };
+    const handleOnChange = (e) => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const data = { ...loginData };
+        data[field] = value;
+        setLoginData(data);
+    };
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if (loginData === {} || !loginData.email || !loginData.password) {
+            setError("Please Enter Your Email And Password");
+        } else {
+            emailSignIn();
+        }
+    };
     return (
         <>
-            {error ? <ErrorModal /> : ""}
             <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" id="login-register-bg">
                 <div className="max-w-md w-full space-y-8">
                     <div>
@@ -84,7 +109,7 @@ const Login = () => {
                             </svg>
                         </button>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form className="mt-8 space-y-6" onSubmit={handleLogin}>
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -96,6 +121,7 @@ const Login = () => {
                                     name="email"
                                     type="email"
                                     autoComplete="email"
+                                    onChange={handleOnChange}
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
                                     placeholder="Email address"
@@ -110,6 +136,7 @@ const Login = () => {
                                     name="password"
                                     type="password"
                                     autoComplete="current-password"
+                                    onChange={handleOnChange}
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
                                     placeholder="Password"

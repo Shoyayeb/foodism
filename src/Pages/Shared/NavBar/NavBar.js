@@ -1,4 +1,3 @@
-
 import { Menu, Popover, Transition } from '@headlessui/react';
 import {
     BookmarkAltIcon,
@@ -20,6 +19,7 @@ import { Link } from 'react-router-dom';
 import logoImage from '../../../Assets/logo.png';
 // import { Fragment } from 'react/cjs/react.production.min';
 import useAuth from './../../../Hooks/useAuth';
+import ErrorModal from './../Modals/ErrorModal';
 
 const solutions = [
     {
@@ -84,11 +84,12 @@ function classNames(...classes) {
 }
 
 const NavBar = () => {
-    const { user, signOutUser } = useAuth();
-    console.log('====================================');
-    console.log(user.photoURL);
-    console.log('====================================');
+    const { user, signOutUser, error } = useAuth();
+
     return (
+        <div>
+            {error ? <ErrorModal /> : ""}
+
         <Popover className="relative bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
@@ -257,7 +258,7 @@ const NavBar = () => {
                         </Popover>
                     </Popover.Group>
 
-                    {user.email ? <Menu as="div" className="ml-3 relative z-30">
+                        {user.uid ? <Menu as="div" className="ml-3 relative z-30">
                         <div>
                             <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <span className="sr-only">Open user menu</span>
@@ -280,29 +281,29 @@ const NavBar = () => {
                             <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a
-                                            href="#"
+                                            <Link
+                                                to="/"
                                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                         >
                                             Your Profile
-                                        </a>
+                                            </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a
-                                            href="#"
+                                            <Link
+                                                to="/"
                                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                         >
                                             Settings
-                                        </a>
+                                            </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
                                         <button
                                             onClick={signOutUser}
-                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 w-full text-left')}
                                         >
                                             Sign out
                                         </button>
@@ -403,6 +404,7 @@ const NavBar = () => {
                 </Popover.Panel>
             </Transition>
         </Popover>
+        </div>
     )
 };
 
