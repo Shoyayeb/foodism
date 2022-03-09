@@ -1,7 +1,7 @@
 import {
-  createUserWithEmailAndPassword, getAuth, updateProfile
+  createUserWithEmailAndPassword, getAuth, onAuthStateChanged, updateProfile
 } from "firebase/auth";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import initializeFirebase from "../Firebase/firebase.init";
 initializeFirebase();
 
@@ -29,6 +29,20 @@ const useFirebase = () => {
       })
       .finally(() => setIsLoading(false));
   };
+  // managing user
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        console.log(user);
+      } else {
+        setUser({});
+      }
+      setIsLoading(false);
+    });
+    return () => unsubscribe();
+  }, [auth]);
+
   return {
     user,
     error,

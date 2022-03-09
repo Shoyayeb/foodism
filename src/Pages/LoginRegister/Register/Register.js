@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from './../../../Hooks/useAuth';
 const Register = () => {
     const [registerData, setRegisterData] = useState({});
-    const { setError, createUserByEmail } = useAuth();
+    const { setError, createUserByEmail, error } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const redirect_uri = location.state?.from || "/home";
@@ -20,7 +20,7 @@ const Register = () => {
         createUserByEmail(
             registerData.email,
             registerData.password,
-            registerData.displayName
+            registerData.name
         ).then((result) => {
             navigate(redirect_uri);
         });
@@ -31,7 +31,7 @@ const Register = () => {
             registerData === {} ||
             !registerData.email ||
             !registerData.password ||
-            !registerData.displayName
+            !registerData.name
         ) {
             setError("Please enter your information correctly");
         } else {
@@ -48,6 +48,9 @@ const Register = () => {
                             Or{' '}
                             <Link to="/login" className="font-medium text-red-600 hover:text-red-500">
                                 Sign in to your account
+                                <div>
+                                    {error ? error : ""}
+                                </div>
                             </Link>
                         </p>
                     </div>
