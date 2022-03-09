@@ -26,12 +26,12 @@ const NotFound = () => {
                         <h1 className="font-light font-sans text-center lg:text-left text-5xl lg:text-8xl my-12 md:my-12 text-gray-700">
                             Sorry, this page isn&#x27;t available
                         </h1>
-                        <Link to="/home" className="px-4 py-4 bg-red-600 rounded-md my-12">
+                        <Link to="/home" className="px-4 py-4 text-white bg-red-600 rounded-md my-12">
                             Go back home
                         </Link>
                     </div>
                     <div className="block w-full mx-auto md:mt-0 relative max-w-md lg:max-w-2xl">
-                        <img src={errorImage} />
+                        <img src={errorImage} alt="error" />
                     </div>
                 </div>
             </div>

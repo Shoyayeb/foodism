@@ -105,6 +105,9 @@ const NavBar = () => {
                         </Popover.Button>
                     </div>
                     <Popover.Group as="nav" className="hidden md:flex space-x-10">
+                        <Link to="/homep" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                            Home
+                        </Link>
                         <Popover className="relative">
                             {({ open }) => (
                                 <>

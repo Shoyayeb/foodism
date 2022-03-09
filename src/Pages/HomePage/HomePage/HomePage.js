@@ -8,13 +8,9 @@ const HomePage = () => {
     return (
         <div>
             <Banner />
-
-            <Foods />
-
-            <Features />
-
             <RiderSection />
-
+            <Foods />
+            <Features />
         </div>
     );
 };
