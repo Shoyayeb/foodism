@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const AllOrders = () => {
     const [orders, setOrders] = useState([]);
@@ -7,10 +8,16 @@ const AllOrders = () => {
     const [open, setOpen] = useState(false);
     const removeService = (id) => {
         const deleteUrl = `http://localhost:4000/removeorder/${id}`;
-        axios.delete(deleteUrl).then((data) => {
-            setOrders(data);
+        if (window.confirm("Delete this order?") === true) {
+            axios.delete(deleteUrl).then((data) => {
+                if (data.data.deletedCount > 0) {
+                    const remaining = orders.filter(
+                        (restPlan) => restPlan._id !== id
+                    );
+                    setOrders(remaining);
+                }
+            });
         }
-        );
     };
     useEffect(() => {
         const url = `http://localhost:4000/orders`;
@@ -39,7 +46,7 @@ const AllOrders = () => {
                                         scope="col"
                                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                     >
-                                        Title
+                                        Address
                                     </th>
                                     <th
                                         scope="col"
@@ -51,23 +58,29 @@ const AllOrders = () => {
                                         scope="col"
                                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                     >
-                                        Role
+                                        Food
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >
+                                        Time
                                     </th>
                                     <th scope="col" className="relative px-6 py-3">
-                                        <span className="sr-only">Edit</span>
+                                        <span className="sr-only">Remove</span>
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
+                            {orders ? <tbody className="bg-white divide-y divide-gray-200">
                                 {orders.map((order) => (
-                                    <tr key={order.email}>
+                                    <tr key={order._id}>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="flex items-center">
                                                 <div className="flex-shrink-0 h-10 w-10">
                                                     <img
                                                         className="h-10 w-10 rounded-full"
                                                         src={order.userImage}
-                                                        alt=""
+                                                        alt={order.email}
                                                     />
                                                 </div>
                                                 <div className="ml-4">
@@ -82,30 +95,42 @@ const AllOrders = () => {
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="text-sm text-gray-900">
-                                                {order.title}
+                                                {order.address}
                                             </div>
                                             <div className="text-sm text-gray-500">
-                                                {order.department}
+                                                {order.city}
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                Active
-                                            </span>
+                                            {order.active ? (
+                                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-700">
+                                                    Active
+                                                </span>
+                                            ) : (
+                                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-700">
+                                                    Finished
+                                                </span>
+                                            )}
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {order.role}
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {order.foodName}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm text-gray-900">
+                                                {order.date}
+                                            </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <button
+                                                onClick={() => removeService(order._id)}
                                                 className="text-indigo-600 hover:text-indigo-900"
                                             >
-                                                Edit
+                                                Remove
                                             </button>
                                         </td>
                                     </tr>
                                 ))}
-                            </tbody>
+                            </tbody> : <Spinner />}
                         </table>
                     </div>
                 </div>
