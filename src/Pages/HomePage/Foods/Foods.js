@@ -8,7 +8,7 @@ const Foods = () => {
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        const url = `http://localhost:4000/foods`;
+        const url = `https://foodism.herokuapp.com/foods`;
         axios.get(url).then((data) => {
             console.log('====================================');
             console.log(data.data);
@@ -52,7 +52,7 @@ const Foods = () => {
                                     </span> : ""}
 
                                 </div>
-                                <p className="text-sm font-medium text-gray-900">{product.price}</p>
+                                <p className="text-sm font-medium text-gray-900">{product.price}$</p>
                             </div>
                         </div>
                     ))}
