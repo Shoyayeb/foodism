@@ -1,30 +1,30 @@
-import { AnnotationIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/react/outline';
+import { ArrowUpIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/react/outline';
 import React from 'react';
 
 const features = [
     {
-        name: 'Competitive exchange rates',
+        name: 'Wide area service',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+            'Our Delevery system supports a large scale of area so that you can have your food even if you are far long from the resturants.',
         icon: GlobeAltIcon,
     },
     {
         name: 'No hidden fees',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+            'We are trustable. Our system charge you only for the food, there is no extra charge for you to get the best food',
         icon: ScaleIcon,
     },
     {
-        name: 'Transfers are instant',
+        name: 'Fastest Delevery',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+            'Our people who work for delevering food are super active. You can have your food just before you even imagine',
         icon: LightningBoltIcon,
     },
     {
-        name: 'Mobile notifications',
+        name: 'Live Update',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-        icon: AnnotationIcon,
+            'Our super fast system give you update on status of your order like is it ready? or where is the delevery man? Just install our Mobile App',
+        icon: ArrowUpIcon,
     },
 ]
 const Features = () => {
@@ -34,11 +34,10 @@ const Features = () => {
                 <div className="lg:text-center">
                     <h2 className="text-base text-red-600 font-semibold tracking-wide uppercase">Transactions</h2>
                     <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                        A better way to send money
+                        A better way to get better food
                     </p>
                     <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                        Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
-                        accusamus quisquam.
+                        With Foodism you can have quality food at your doorstep without any hassle to go out . We have a home delevery option so that customers can get food quickly and easily.
                     </p>
                 </div>
 
