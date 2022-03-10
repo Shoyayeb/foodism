@@ -1,26 +1,33 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import useAuth from './../../Hooks/useAuth';
 
 const AddFood = () => {
-    const [registerData, setRegisterData] = useState({});
-    const { error, setError } = useAuth();
+    const [foodData, setRegisterData] = useState({});
+    const [added, setAdded] = useState(false)
+    const { setError } = useAuth();
     const handleOnChange = (e) => {
         const field = e.target.name;
         const value = e.target.value;
-        const data = { ...registerData };
+        const data = { ...foodData };
         data[field] = value;
         setRegisterData(data);
     };
     const handleAddFood = (e) => {
         e.preventDefault();
         if (
-            registerData === {} || !registerData.foodname || !registerData.label || !registerData.imagelink || !registerData.price || !registerData.description
+            foodData === {} || !foodData.foodname || !foodData.label || !foodData.imagelink || !foodData.price || !foodData.description
         ) {
             setError("Please enter your information correctly");
         } else {
-            console.log('====================================');
-            console.log(registerData);
-            console.log('====================================');
+            axios
+                .post("http://localhost:4000/addfood", foodData)
+                .then(function (res) {
+                    setAdded(true);
+                })
+                .catch(function (error) {
+                    setError(error);
+                });
         }
     }
     return (
@@ -105,7 +112,7 @@ const AddFood = () => {
                                             name="description"
                                             rows={3}
                                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                            placeholder="you@example.com"
+                                            placeholder="brief description for the food"
                                             defaultValue={''}
                                         />
                                     </div>

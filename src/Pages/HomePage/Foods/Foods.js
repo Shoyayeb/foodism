@@ -1,88 +1,56 @@
 import { ArrowRightIcon } from '@heroicons/react/solid';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-const products = [
-    {
-        id: 1,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://img.freepik.com/free-photo/front-view-tasty-meat-burger-with-cheese-salad-dark-background_140725-89597.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    {
-        id: 2,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://img.freepik.com/free-photo/side-view-shawarma-with-fried-potatoes-board-cookware_176474-3215.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    {
-        id: 3,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://img.freepik.com/free-photo/crispy-fried-chicken-wooden-cutting-board_1150-20220.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    {
-        id: 4,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://img.freepik.com/free-photo/front-view-chicken-pizza-with-bell-red-yellow-pepper-with-yellow-cherry-tomatoes_141793-4592.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    {
-        id: 5,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://img.freepik.com/free-photo/delicious-meatballs-with-french-fries_550617-6297.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    {
-        id: 6,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://img.freepik.com/free-photo/ham-cheese-club-sandwich-plate_1147-510.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    // More products...
-]
+import Spinner from './../../Shared/Spinner/Spinner';
+
 const Foods = () => {
+    const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const url = `http://localhost:4000/foods`;
+        axios.get(url).then((data) => {
+            console.log('====================================');
+            console.log(data.data);
+            console.log('====================================');
+            setLoading(false);
+            setServices(data.data);
+        });
+    }, []);
     return (
         <div className="bg-white">
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
                 <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Hottest Food In Your Area</h2>
-
-                <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                    {products.map((product) => (
-                        <div key={product.id} className="group relative">
+                {loading ? (
+                    <Spinner />
+                ) : <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                    {services.map((product) => (
+                        <div key={product._id} className="group relative">
                             <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
                                 <img
-                                    src={product.imageSrc}
-                                    alt={product.imageAlt}
+                                    src={product.imagelink}
+                                    alt={product.foodname}
                                     className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                                 />
                             </div>
                             <div className="mt-4 flex justify-between">
                                 <div>
                                     <h3 className="text-sm text-gray-700">
-                                        <a href={product.href}>
+                                        <a href={product._id}>
                                             <span aria-hidden="true" className="absolute inset-0" />
-                                            {product.name}
+                                            {product.foodname}
                                         </a>
                                     </h3>
-                                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                                    {product.label === "Popular" ? <span class="mt-1 px-2 py-1  text-sm rounded text-white  bg-pink-600 font-medium">
+                                        {product.label}
+                                    </span> : ""}
+                                    {product.label === "Hot" ? <span class="mt-1 px-2 py-1  text-sm rounded text-white  bg-orange-600 font-medium">
+                                        {product.label}
+                                    </span> : ""}
+                                    {product.label === "New" ? <span class="mt-1 px-2 py-1  text-sm rounded text-white  bg-green-600 font-medium">
+                                        {product.label}
+                                    </span> : ""}
+
                                 </div>
                                 <p className="text-sm font-medium text-gray-900">{product.price}</p>
                             </div>
@@ -103,7 +71,8 @@ const Foods = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>}
+
             </div>
         </div>
     );
