@@ -36,18 +36,18 @@ const Foods = () => {
                             <div className="mt-4 flex justify-between">
                                 <div>
                                     <h3 className="text-sm text-gray-700">
-                                        <a href={product._id}>
+                                        <Link to={`/order/${product._id}`}>
                                             <span aria-hidden="true" className="absolute inset-0" />
                                             {product.foodname}
-                                        </a>
+                                        </Link>
                                     </h3>
-                                    {product.label === "Popular" ? <span class="mt-1 px-2 py-1  text-sm rounded text-white  bg-pink-600 font-medium">
+                                    {product.label === "Popular" ? <span className="mt-1 px-2 py-1  text-sm rounded text-white  bg-pink-600 font-medium">
                                         {product.label}
                                     </span> : ""}
-                                    {product.label === "Hot" ? <span class="mt-1 px-2 py-1  text-sm rounded text-white  bg-orange-600 font-medium">
+                                    {product.label === "Hot" ? <span className="mt-1 px-2 py-1  text-sm rounded text-white  bg-orange-600 font-medium">
                                         {product.label}
                                     </span> : ""}
-                                    {product.label === "New" ? <span class="mt-1 px-2 py-1  text-sm rounded text-white  bg-green-600 font-medium">
+                                    {product.label === "New" ? <span className="mt-1 px-2 py-1  text-sm rounded text-white  bg-green-600 font-medium">
                                         {product.label}
                                     </span> : ""}
 
