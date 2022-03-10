@@ -37,9 +37,9 @@ const OrderFood = () => {
         formData.name = user.displayName;
         formData.email = user.email;
         formData.uid = user.uid;
-        formData.foodId = foodId;
+        formData.foodName = foodData.foodname;
         formData.serviceName = foodData.serviceName;
-        formData.paid = false;
+        formData.active = true;
         formData.price = foodData.servicePrice;
         axios
             .post("http://localhost:4000/orderfood", formData)
@@ -130,17 +130,17 @@ const OrderFood = () => {
 
                                         <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                                             <label
-                                                htmlFor="time"
+                                                htmlFor="city"
                                                 className="block text-sm font-medium text-gray-700"
                                             >
-                                                Time
+                                                City
                                             </label>
                                             <input
                                                 type="text"
-                                                name="time"
+                                                name="city"
                                                 onChange={handleOnChange}
                                                 required
-                                                id="time"
+                                                id="city"
                                                 autoComplete="address-level2"
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                             />

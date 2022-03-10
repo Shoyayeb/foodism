@@ -11,6 +11,7 @@ import NotFound from './Pages/NotFound/NotFound';
 import OrderFood from './Pages/OrderFood/OrderFood';
 import Footer from './Pages/Shared/Footer/Footer';
 import NavBar from './Pages/Shared/NavBar/NavBar';
+import UserOrders from './Pages/UserOrders/UserOrders';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/add_food" element={<AddFood />} />
           <Route path="/foods" element={<Foods />} />
+          <Route path="/myorders" element={<UserOrders />} />
           <Route path="/order/:foodId" element={<OrderFood />} />
           <Route path="dashboard/*" element={<DashBoard />} />
           <Route path="*" element={<NotFound />} />

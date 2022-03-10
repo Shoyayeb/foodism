@@ -282,7 +282,7 @@ const NavBar = () => {
                                 <Menu.Item>
                                     {({ active }) => (
                                             <Link
-                                                to="/"
+                                                to="/myorders"
                                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                         >
                                                 My Orders
@@ -292,7 +292,7 @@ const NavBar = () => {
                                     <Menu.Item>
                                         {({ active }) => (
                                             <Link
-                                                to="/"
+                                                to="/allorders"
                                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                             >
                                                 Manage All Orders
