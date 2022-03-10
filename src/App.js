@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import AuthProvider from './Context/AuthProvider/AuthProvider';
 import AddFood from './Pages/AddFood/AddFood';
+import AllOrders from './Pages/AllOrders/AllOrders';
 import DashBoard from './Pages/DashBoard/DashBoard/DashBoard';
 import Foods from './Pages/HomePage/Foods/Foods';
 import HomePage from './Pages/HomePage/HomePage/HomePage';
@@ -26,6 +27,7 @@ function App() {
           <Route path="/add_food" element={<AddFood />} />
           <Route path="/foods" element={<Foods />} />
           <Route path="/myorders" element={<UserOrders />} />
+          <Route path="/allorders" element={<AllOrders />} />
           <Route path="/order/:foodId" element={<OrderFood />} />
           <Route path="dashboard/*" element={<DashBoard />} />
           <Route path="*" element={<NotFound />} />
