@@ -8,22 +8,22 @@ const Footer = () => {
             <div className="max-w-screen-xl mx-auto px-4">
                 <ul className="max-w-screen-md mx-auto text-lg font-light flex flex-wrap justify-between">
                     <li className="my-2">
-                        <HashLink className="text-gray-600hover:text-gray-800 transition-colors duration-200" to="#home">
+                        <HashLink className="text-gray-600hover:text-gray-800 transition-colors duration-200" to="/home#home">
                             Home
                         </HashLink>
                     </li>
                     <li className="my-2">
-                        <HashLink className="text-gray-600hover:text-gray-800 transition-colors duration-200" to="#rider">
+                        <HashLink className="text-gray-600hover:text-gray-800 transition-colors duration-200" to="/home#rider">
                             Rider
                         </HashLink>
                     </li>
                     <li className="my-2">
-                        <HashLink className="text-gray-600hover:text-gray-800 transition-colors duration-200" to="#foods">
+                        <HashLink className="text-gray-600hover:text-gray-800 transition-colors duration-200" to="/home#foods">
                             Foods
                         </HashLink>
                     </li>
                     <li className="my-2">
-                        <HashLink className="text-gray-600hover:text-gray-800 transition-colors duration-200" to="#features">
+                        <HashLink className="text-gray-600hover:text-gray-800 transition-colors duration-200" to="/home#features">
                             Features
                         </HashLink>
                     </li>
