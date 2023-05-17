@@ -7,7 +7,7 @@ const AllOrders = () => {
     const cancelButtonRef = useRef(null);
     const [open, setOpen] = useState(false);
     const removeService = (id) => {
-        const deleteUrl = `https://foodism.herokuapp.com/removeorder/${id}`;
+        const deleteUrl = `https://foodism.onrender.com/removeorder/${id}`;
         if (window.confirm("Delete this order?") === true) {
             axios.delete(deleteUrl).then((data) => {
                 if (data.data.deletedCount > 0) {
@@ -20,7 +20,7 @@ const AllOrders = () => {
         }
     };
     useEffect(() => {
-        const url = `https://foodism.herokuapp.com/orders`;
+        const url = `https://foodism.onrender.com/orders`;
         axios.get(url).then((data) => {
             setOrders(data.data);
             console.log('====================================');

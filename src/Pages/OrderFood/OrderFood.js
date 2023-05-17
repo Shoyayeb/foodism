@@ -17,7 +17,7 @@ const OrderFood = () => {
 
     const cancelButtonRef = useRef(null);
     useEffect(() => {
-        const url = `https://foodism.herokuapp.com/foods/${foodId}`;
+        const url = `https://foodism.onrender.com/foods/${foodId}`;
         axios.get(url).then((data) => {
             setFoodData(data.data);
             setLoading(false)
@@ -43,7 +43,7 @@ const OrderFood = () => {
         formData.active = true;
         formData.price = foodData.servicePrice;
         axios
-            .post("https://foodism.herokuapp.com/orderfood", formData)
+            .post("https://foodism.onrender.com/orderfood", formData)
             .then(function (res) {
                 setOrdered(true);
             })

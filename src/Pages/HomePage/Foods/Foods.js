@@ -8,7 +8,7 @@ const Foods = () => {
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        const url = `https://foodism.herokuapp.com/foods`;
+        const url = `https://foodism.onrender.com/foods`;
         axios.get(url).then((data) => {
             console.log('====================================');
             console.log(data.data);

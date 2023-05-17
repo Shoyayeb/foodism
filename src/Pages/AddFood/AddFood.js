@@ -21,7 +21,7 @@ const AddFood = () => {
             setError("Please enter your information correctly");
         } else {
             axios
-                .post("https://foodism.herokuapp.com/addfood", foodData)
+                .post("https://foodism.onrender.com/addfood", foodData)
                 .then(function (res) {
                     setAdded(true);
                 })
